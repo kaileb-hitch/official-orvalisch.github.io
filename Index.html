@@ -139,7 +139,7 @@
 
     <header>
         <div class="flag-container">
-            <img src="Ørvalisch Flag.jpg" alt="Official Ørvalisch Flag">
+            <img src="Ørvalisch Flag.png" alt="Official Ørvalisch Flag">
         </div>
         <h1>Ørvalisch</h1>
         <p class="subtitle">The language of those who know</p>
@@ -149,7 +149,7 @@
         
         <section id="about">
             <h2>About the Language</h2>
-            <p><strong>Ørvalisch</strong> (<em>ørvalisch</em>) is a constructed linguistic system built upon robust strategic, linguistic, and cultural philosophies[cite: 301, 486, 513]. Visually anchored by its official banner, the language features intricate grammatical distinctions, gender-based temporal parameters [cite: 329, 333, 335], and deep conceptual roots inspired by the game of chess (<em>scatra</em>)[cite: 512, 513].</p>
+            <p><strong>Ørvalisch</strong> (<em>ørvalisch</em>) is a constructed linguistic system built upon robust strategic, linguistic, and cultural philosophies. Visually anchored by its official banner, the language features intricate grammatical distinctions, gender-based temporal parameters, and deep conceptual roots inspired by the game of chess (<em>scatra</em>).</p>
         </section>
 
         <section id="dictionary">
@@ -168,7 +168,6 @@
     </footer>
 
     <script>
-        // Comprehensive dictionary array containing all items from your uploaded document
         const dictionaryData = [
             { word: "AA", ipa: "\\ˈæ\\", pos: "det.", def: "A; an [Indefinite Article]. Literal Meaning: A single unspecific target noun. Note: Emphasizes 'a' or 'an', though dropping it is grammatically acceptable in informal contexts (Germanic drop style). Example: Itel pourchuss a appala. — I buy an apple." },
             { word: "Abota", ipa: "\\e-ˈbō-te\\", pos: "adv. & prep.", def: "About. Literal Meaning: Concerning a topic [e.g., 'a book about history'] / Near to or approximately in space, time, or quantity [e.g., 'about three o'clock' or 'moving about the room']." },
@@ -178,7 +177,7 @@
             { word: "Aponal", ipa: "\\ˈæ-pə-næl\\", pos: "n.", def: "Monkey. Literal Meaning: A small to medium-sized primate, typically characterized by a long tail, expressive behavior, and an arboreal lifestyle." },
             { word: "Appala", ipa: "\\ˈæ-pə-lə\\", pos: "n.", def: "Apple. Literal Meaning: Apple." },
             { word: "Arrascala", ipa: "\\ə-ˈræ-skə-lə\\", pos: "v.", def: "Are [Universal Present Copula variant / Auxiliary]. Literal Meaning: State of being (plural or second-person present tense) / Are. Note: Used interchangeably with the universal present copula amo in specific dialectal regions or for structural emphasis." },
-            { word: "Artophia", ipa: "\\ɑːr-ˈtō-fē-ə\\", pos: "n.", def: "The psychological phenomenon where the mind actively rejects or refuses to accept an overwhelming or painful reality, serving as a profound internal defense mechanism or state of cognitive denial." },
+            { word: "Artophia", ipa: "\\ɒːr-ˈtō-fē-ə\\", pos: "n.", def: "The psychological phenomenon where the mind actively rejects or refuses to accept an overwhelming or painful reality, serving as a profound internal defense mechanism or state of cognitive denial." },
             { word: "Atoma", ipa: "\\ə-ˈtō-mə\\", pos: "n.", def: "Atom. Literal Meaning: The basic unit of a chemical element." },
             { word: "Auslarnd", ipa: "\\ˈoʊs-lärnd\\", pos: "n.", def: "Australia. Root: From English Australia blended with German Ausland (foreign country). Literal Meaning: Foreign Australia / Out-land Australia." },
             { word: "Azer", ipa: "\\ˈä-zər\\", pos: "adv. & prep.", def: "After. Literal Meaning: After / Behind in time." },
@@ -439,15 +438,13 @@
             { word: "- 𐦠", ipa: "", pos: "suffix", def: "Plural suffix. Affixed directly to the end of any countable noun to indicate plurality. Example: appala (apple) → appala 𐦠 (apples)." }
         ];
 
-        // Function to build out HTML items dynamically
         function loadDictionary() {
             const listContainer = document.getElementById('dictionaryList');
-            listContainer.innerHTML = ''; // Reset container
+            listContainer.innerHTML = '';
 
             dictionaryData.forEach((item) => {
                 const itemDiv = document.createElement('div');
                 itemDiv.className = 'dict-item';
-                // Store structural tags inside attributes for rapid search queries
                 itemDiv.setAttribute('data-search', `${item.word} ${item.def}`.toLowerCase());
 
                 itemDiv.innerHTML = `
@@ -460,7 +457,6 @@
             });
         }
 
-        // Live filtration function
         function searchDict() {
             let input = document.getElementById('searchBar').value.toLowerCase();
             let items = document.getElementsByClassName('dict-item');
@@ -475,7 +471,6 @@
             }
         }
 
-        // Initialize the dataset automatically on page load
         window.onload = loadDictionary;
     </script>
 </body>
