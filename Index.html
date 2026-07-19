@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Ørvalisch Language</title>
+    <style>
+        :root {
+            --primary-blue: #0b457c;
+            --accent-gold: #cca43b;
+            --pure-white: #ffffff;
+            --dark-gray: #1a1a1a;
+            --light-bg: #f4f6f9;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: var(--light-bg);
+            color: var(--dark-gray);
+            line-height: 1.6;
+        }
+
+        header {
+            background-color: var(--primary-blue);
+            color: var(--pure-white);
+            text-align: center;
+            padding: 40px 20px;
+            border-bottom: 5px solid var(--accent-gold);
+        }
+
+        .flag-container {
+            max-width: 600px;
+            margin: 0 auto 20px auto;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .flag-container img {
+            width: 100%;
+            display: block;
+        }
+
+        h1 {
+            margin: 10px 0 5px 0;
+            font-size: 2.5rem;
+            letter-spacing: 1px;
+        }
+
+        .subtitle {
+            font-style: italic;
+            color: var(--accent-gold);
+            font-size: 1.2rem;
+            margin: 0;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        section {
+            background: var(--pure-white);
+            padding: 30px;
+            margin-bottom: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        }
+
+        h2 {
+            color: var(--primary-blue);
+            border-bottom: 2px solid var(--light-bg);
+            padding-bottom: 10px;
+            margin-top: 0;
+        }
+
+        .search-box {
+            width: 100%;
+            padding: 12px;
+            font-size: 1rem;
+            border: 2px solid #ddd;
+            border-radius: 6px;
+            box-sizing: border-box;
+            margin-bottom: 20px;
+        }
+
+        .search-box:focus {
+            border-color: var(--primary-blue);
+            outline: none;
+        }
+
+        .dict-list {
+            max-height: 500px;
+            overflow-y: auto;
+            border: 1px solid #eee;
+            border-radius: 6px;
+            padding: 10px;
+            background: #fafafa;
+        }
+
+        .dict-item {
+            padding: 12px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .dict-item:last-child {
+            border-bottom: none;
+        }
+
+        .word-title {
+            font-weight: bold;
+            color: var(--primary-blue);
+            font-size: 1.1rem;
+        }
+
+        .word-pron {
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        .word-pos {
+            font-style: italic;
+            color: var(--accent-gold);
+            font-size: 0.9rem;
+        }
+
+        footer {
+            text-align: center;
+            padding: 20px;
+            color: #777;
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="flag-container">
+            <img src="Ørvalisch Flag.jpg" alt="Official Ørvalisch Flag">
+        </div>
+        <h1>Ørvalisch</h1>
+        <p class="subtitle">The language of those who know</p>
+    </header>
+
+    <div class="container">
+        
+        <section id="about">
+            <h2>About the Language</h2>
+            <p><strong>Ørvalisch</strong> (<em>ørvalisch</em>) is a constructed linguistic system built upon robust strategic, linguistic, and cultural philosophies[cite: 301, 486, 513]. Visually anchored by its official banner, the language features intricate grammatical distinctions, gender-based temporal parameters [cite: 329, 333, 335], and deep conceptual roots inspired by the game of chess (<em>scatra</em>)[cite: 512, 513].</p>
+        </section>
+
+        <section id="dictionary">
+            <h2>Complete Dictionary Index</h2>
+            <p>Search for terms in Ørvalisch or keywords in English:</p>
+            <input type="text" id="searchBar" class="search-box" placeholder="Type to search all words..." onkeyup="searchDict()">
+            
+            <div id="dictionaryList" class="dict-list">
+                </div>
+        </section>
+
+    </div>
+
+    <footer>
+        <p>&copy; 2026 The Ørvalisch Language Community. Hosted via GitHub Pages.</p>
+    </footer>
+
+    <script>
+        // Comprehensive dictionary array containing all items from your uploaded document
+        const dictionaryData = [
+            { word: "AA", ipa: "\\ˈæ\\", pos: "det.", def: "A; an [Indefinite Article]. Literal Meaning: A single unspecific target noun. Note: Emphasizes 'a' or 'an', though dropping it is grammatically acceptable in informal contexts (Germanic drop style). Example: Itel pourchuss a appala. — I buy an apple." },
+            { word: "Abota", ipa: "\\e-ˈbō-te\\", pos: "adv. & prep.", def: "About. Literal Meaning: Concerning a topic [e.g., 'a book about history'] / Near to or approximately in space, time, or quantity [e.g., 'about three o'clock' or 'moving about the room']." },
+            { word: "Aeternustapo", ipa: "\\ā-tər-nəs-ˈtæ-pō\\", pos: "adv., adj., & n.", def: "Forever; endless; constantly; eternal; eternity. Literal Meaning: Endless time continuation / Eternity." },
+            { word: "Amo", ipa: "\\ˈæ-mō\\", pos: "v.", def: "Am; is; are [Universal Present Copula]. Literal Meaning: Current state of existence / To be. Note: Links all subjects in the present tense. Example: Itel amo hangre. — I am hungry." },
+            { word: "AP", ipa: "\\ˈā-ˈpē\\", pos: "n.", def: "AI (Artificial Intelligence). Literal Meaning: Machine intelligence or artificial processing systems [Abbreviation/Acronym]." },
+            { word: "Aponal", ipa: "\\ˈæ-pə-næl\\", pos: "n.", def: "Monkey. Literal Meaning: A small to medium-sized primate, typically characterized by a long tail, expressive behavior, and an arboreal lifestyle." },
+            { word: "Appala", ipa: "\\ˈæ-pə-lə\\", pos: "n.", def: "Apple. Literal Meaning: Apple." },
+            { word: "Arrascala", ipa: "\\ə-ˈræ-skə-lə\\", pos: "v.", def: "Are [Universal Present Copula variant / Auxiliary]. Literal Meaning: State of being (plural or second-person present tense) / Are. Note: Used interchangeably with the universal present copula amo in specific dialectal regions or for structural emphasis." },
+            { word: "Artophia", ipa: "\\ɑːr-ˈtō-fē-ə\\", pos: "n.", def: "The psychological phenomenon where the mind actively rejects or refuses to accept an overwhelming or painful reality, serving as a profound internal defense mechanism or state of cognitive denial." },
+            { word: "Atoma", ipa: "\\ə-ˈtō-mə\\", pos: "n.", def: "Atom. Literal Meaning: The basic unit of a chemical element." },
+            { word: "Auslarnd", ipa: "\\ˈoʊs-lärnd\\", pos: "n.", def: "Australia. Root: From English Australia blended with German Ausland (foreign country). Literal Meaning: Foreign Australia / Out-land Australia." },
+            { word: "Azer", ipa: "\\ˈä-zər\\", pos: "adv. & prep.", def: "After. Literal Meaning: After / Behind in time." },
+            { word: "Bastalor", ipa: "\\bæ-ˈstæ-lɔːr\\", pos: "n.", def: "Bishop. Literal Meaning: A diagonal-moving strategist or counselor piece in chess; or, by extension, any trusted advisor who approaches problems and strategy from an angle rather than head-on." },
+            { word: "Batook", ipa: "\\bə-ˈtük\\", pos: "n.", def: "Bag. Literal Meaning: Bag / Pouch." },
+            { word: "Beec", ipa: "\\ˈbēk\\", pos: "n.", def: "Beef. Literal Meaning: Beef / Cow meat." },
+            { word: "Betøl", ipa: "\\ˈbā-tøl\\", pos: "n.", def: "Beetle. Literal Meaning: An insect characterized by hard, shell-like forewings that form a protective cover over its back." },
+            { word: "Bolliabis", ipa: "\\ˌbɒ-lē-ˈɑː-bɪs\\", pos: "n.", def: "Bison; bull. Literal Meaning: A large, heavily built horned mammal, known for its immense physical strength and status as a powerful herd animal." },
+            { word: "Bowcas", ipa: "\\ˈboʊ-kæs\\", pos: "conj.", def: "Because. Literal Meaning: By cause of / Because." },
+            { word: "Brav [SLANG]", ipa: "\\ˈbræv\\", pos: "adj. & interj.", def: "Slang for Bravo; brilliant; expression of disbelief. Literal Meaning: Brilliant / Unbelievable." },
+            { word: "Brohter", ipa: "\\ˈbrō-tər\\", pos: "n.", def: "Brother. Literal Meaning: Male sibling." },
+            { word: "Brood", ipa: "\\ˈbrüd\\", pos: "n.", def: "Bread. Literal Meaning: Loaf / Baked dough bread." },
+            { word: "Burnell", ipa: "\\bər-ˈnel\\", pos: "n.", def: "Sun. Literal Meaning: Burning orb / Sun." },
+            { word: "ßacht", ipa: "\\ˈzäkt\\", pos: "n.", def: "Night [Masculine variant]. Root: Derived from the German word Nacht. Literal Meaning: Starlit dark hours [Masculine agreement]." },
+            { word: "ßai", ipa: "\\ˈbzī\\ or \\ˈbsī\\", pos: "adj. & n.", def: "Blue. Literal Meaning: The color blue. Note: Utilizes the complex buzzing sibilant cluster variant of the letter ß, producing a distinct 'bz/bs' acoustic initialization." },
+            { word: "ßicht", ipa: "\\ˈzīkt\\", pos: "n.", def: "Night [Feminine variant]. Literal Meaning: Starlit dark hours [Feminine agreement]." },
+            { word: "ßT [SLANG]", ipa: "\\ˈzē-tē\\", pos: "n.", def: "Slang/short for Night [Applies to either gender]. Literal Meaning: Night." },
+            { word: "ßtagg", ipa: "\\ˈstäg\\", pos: "n.", def: "Morning [Masculine variant]. Literal Meaning: Early sunlight period [Masculine agreement]." },
+            { word: "ßtakk", ipa: "\\ˈßtäk\\", pos: "n.", def: "Morning [Feminine variant]. Literal Meaning: Early sunlight period [Feminine agreement]." },
+            { word: "CCacku", ipa: "\\ˈkæ-kü\\", pos: "n.", def: "Cake. Literal Meaning: Sweet baked dessert loaf / Cake." },
+            { word: "Cahno", ipa: "\\ˈkäh-nō\\", pos: "v.", def: "Can; to be able to. Literal Meaning: Ability to do / Can." },
+            { word: "Cakko", ipa: "\\ˈkæ-kō\\", pos: "n.", def: "Cocoa. Literal Meaning: Cocoa powder or bean substance." },
+            { word: "Cakko-sta", ipa: "\\ˈkæ-kō-stə\\", pos: "n.", def: "Chocolate. Literal Meaning: Solidified cocoa treat / Chocolate." },
+            { word: "Canislostak", ipa: "\\ˌkæ-nɪs-ˈlɒ-stæk\\", pos: "n.", def: "Dog. Literal Meaning: A domesticated carnivorous mammal, widely kept as a companion, guardian, or working animal; known for its loyalty." },
+            { word: "Caro", ipa: "\\ˈkä-rō\\", pos: "n.", def: "Car. Literal Meaning: Wheeled vehicle / Car." },
+            { word: "Carove", ipa: "\\kä-ˈrōv\\", pos: "v.", def: "Drive; drove. Literal Meaning: Command a car / Drive." },
+            { word: "Carrolta", ipa: "\\kə-ˈrōl-tə\\", pos: "n.", def: "Care. Literal Meaning: Serious attention or consideration applied to doing something correctly; a state of mind of being concerned for someone or something." },
+            { word: "Celatino", ipa: "\\seh-lə-ˈtē-nō\\", pos: "n.", def: "Banana. Literal Meaning: Yellow sweet crescent fruit / Banana." },
+            { word: "Civila", ipa: "\\sih-ˈvih-lə\\", pos: "n.", def: "Civilization; city. Literal Meaning: Civilized center / City." },
+            { word: "Clastorac", ipa: "\\ˈklæ-stə-ræk\\", pos: "n. & v.", def: "Checkmate. Literal Meaning: The definitive end of a chess game where the opposing leader is trapped; or, generally, a total defeat or cornered situation from which there is no escape, or the act of completely outmaneuvering an opponent." },
+            { word: "Cognita", ipa: "\\ɒg-ˈnē-tə\\", pos: "v.", def: "Know; understand [Present]. Root: Derived from the Latin word Cognitio. Literal Meaning: Possession of knowledge." },
+            { word: "Cognital", ipa: "\\ɒg-ˈnē-təl\\", pos: "v.", def: "Knowing; understanding [Progressive/Participle]. Literal Meaning: Actively holding knowledge." },
+            { word: "Cognitu", ipa: "\\ɒg-ˈnē-tü\\", pos: "v.", def: "Knew; understood [Past]. Literal Meaning: Held knowledge in the past." },
+            { word: "Cølanellut", ipa: "\\sœ-lə-ˈne-lət\\", pos: "n.", def: "Cell. Literal Meaning: The basic structural, functional, and biological unit of all known living organisms." },
+            { word: "Cortel", ipa: "\\ˈcɔːr-təl\\", pos: "n.", def: "Castle; Rook. Literal Meaning: The structural fortification piece on a chess board; or, generally, a stronghold, bastion, safe place, or a highly reliable and sturdy person who acts as a protector." },
+            { word: "Contallonaluminum", ipa: "\\ˌkɒn-tə-loʊn-ə-ˈluː-mɪ-nəm\\", pos: "n.", def: "Can. Literal Meaning: A cylindrical metal container, especially one made of aluminum." },
+            { word: "Cremos", ipa: "\\ˈkrā-mōs\\", pos: "n.", def: "Cream. Literal Meaning: Thick dairy layer / Cream." },
+            { word: "Crøbe", ipa: "\\ˈkrø-bə\\", pos: "n.", def: "Crab. Literal Meaning: A marine crustacean with a broad, flat shell, a pair of pincers, and a distinct sideways walking movement." },
+            { word: "Dandinalona Flo", ipa: "\\dæn-dih-nə-ˈlō-nə flō\\", pos: "n.", def: "Dandelion flower. Literal Meaning: Dandelion flower bloom." },
+            { word: "Dasina Flo", ipa: "\\də-ˈsē-nə flō\\", pos: "n.", def: "Daisy flower. Literal Meaning: Daisy flower bloom." },
+            { word: "Datta", ipa: "\\ˈdæ-tə\\", pos: "pron. & det.", def: "That [Informal Demonstrative]. Literal Meaning: The specific thing further away. Note: Used casually with friends, peers, or family." },
+            { word: "Delfinotto", ipa: "\\ˌdel-fɪ-ˈnɒ-tō\\", pos: "n.", def: "Dolphin. Literal Meaning: A highly intelligent aquatic mammal known for its sleek body, playful nature, and complex social communication." },
+            { word: "Dilecta", ipa: "\\dih-ˈlek-tə\\", pos: "n.", def: "Dialect. Literal Meaning: Dialect / Regional language variety." },
+            { word: "Dore", ipa: "\\ˈdōr\\", pos: "n.", def: "Door. Literal Meaning: A hinged, sliding, or revolving barrier for closing the entrance to a room or building." },
+            { word: "Dostarospra", ipa: "\\ˌdō-stə-ˈrō-sprə\\", pos: "n. & v.", def: "Party. Literal Meaning: A social gathering of people for celebration, amusement, and community; or, the act of engaging in such festive merrymaking." },
+            { word: "Dutn", ipa: "\\ˈdətn\\", pos: "adv. & prep.", def: "Down. Literal Meaning: Moving or pointing toward a lower position." },
+            { word: "Duralloca", ipa: "\\ˌdʊ-ræ-ˈlō-kə\\", pos: "n. & v.", def: "Dance. Literal Meaning: Rhythmic movement of the body, usually to music; to perform such movements." },
+            { word: "Duralloca-husa", ipa: "\\ˌdʊ-ræ-ˈlō-kə-ˈhuː-sə\\", pos: "n.", def: "Disco; nightclub. Literal Meaning: A dance house; a commercial establishment or social venue designated for people to gather and dance to music." },
+            { word: "Echta", ipa: "\\ˈek-tə\\", pos: "num.", def: "Eight (8). Literal Meaning: The quantity of eight." },
+            { word: "Eldoraut", ipa: "\\ˈel-dɔːr-aʊt\\", pos: "n.", def: "God. Literal Meaning: The prime creator or supreme divine entity." },
+            { word: "Eletrokatida", ipa: "\\ə-ˌle-trō-kə-ˈtē-də\\", pos: "n.", def: "Electricity. Literal Meaning: Electrical energy; the flow of electrical charge." },
+            { word: "Equusol", ipa: "\\ˈe-kwə-sɒl\\", pos: "n.", def: "Horse. Literal Meaning: A large, strong, hoofed mammal traditionally domesticated for riding, pulling loads, and companionship." },
+            { word: "Eskard", ipa: "\\ˈe-skɑːrd\\", pos: "n. & v.", def: "Check. Literal Meaning: A state of immediate threat directed at the leader piece in chess; or, generally, a sudden warning sign or threat to stability, or the act of putting someone on the defensive." },
+            { word: "Espair", ipa: "\\e-ˈspār\\", pos: "n.", def: "Spain. Root: Blended from Spanish España and English Spain. Literal Meaning: The land of Spain." },
+            { word: "Eto", ipa: "\\ˈā-tō\\", pos: "v.", def: "Eat; consume; devour [Present]. Literal Meaning: Act of taking in food / Consume." },
+            { word: "Eta", ipa: "\\ˈā-tə\\", pos: "v.", def: "Eating; consuming; devouring [Progressive]. Literal Meaning: Currently processing food." },
+            { word: "Etu", ipa: "\\ˈā-tü\\", pos: "v.", def: "Ate; consumed; devoured [Past]. Literal Meaning: Finished processing food." },
+            { word: "Evena", ipa: "\\ev-en-ah\\", pos: "n.", def: "Evening [Feminine variant]. Literal Meaning: Twilight or late day period [Feminine agreement]." },
+            { word: "Eveno", ipa: "\\ev-en-oh\\", pos: "n.", def: "Evening [Masculine variant]. Literal Meaning: Twilight or late day period [Masculine agreement]." },
+            { word: "Excalascort", ipa: "\\ˌek-skə-ˈlæ-skōrt\\", pos: "n.", def: "Telescope. Literal Meaning: An optical instrument designed to make distant objects appear nearer." },
+            { word: "Exide", ipa: "\\ˈek-sīd\\", pos: "adj.", def: "Ice cold; cold. Literal Meaning: Freezing thermal state / Chilled. Example: Exide-kenzee — Cold coffee / Iced coffee (literal combination)." },
+            { word: "Ezora", ipa: "\\e-ˈzɔː-rə\\", pos: "conj. & adv.", def: "Either. Literal Meaning: One or the other of two options or possibilities; or, when used in negative contexts, acting as an adverb meaning 'also not' or 'likewise,' indicating that a negative state or absence applies equally to another element." },
+            { word: "Fahfa", ipa: "\\ˈfä-fä\\", pos: "n.", def: "Father; dad; papa. Literal Meaning: Paternal parent." },
+            { word: "Fant", ipa: "\\ˈfänt\\", pos: "v.", def: "Want; to desire. Literal Meaning: Lacking something desired / Want." },
+            { word: "Faucheht", ipa: "\\ˈfaʊ-tʃɛt\\", pos: "n.", def: "Faucet. Literal Meaning: A device for controlling the flow of a liquid from a pipe." },
+            { word: "Feliøne", ipa: "\\fe-ˈlē-ō-nē\\", pos: "n.", def: "Feline; a cat. Root: From Latin feles and English feline. Literal Meaning: Feline creature / Cat." },
+            { word: "Ferkana", ipa: "\\fɛr-ˈkɑː-nə\\", pos: "n.", def: "Fork. Literal Meaning: A handheld utensil featuring two or more prongs, used primarily for piercing, lifting, and holding food during preparation or dining." },
+            { word: "Fie", ipa: "\\ˈfē\\", pos: "det.", def: "The [Definite Article]. Literal Meaning: The specific identified target noun. Example: Mana feliøne vada utn inte fie kenzee-husa. — My cat goes up into the coffee-house." },
+            { word: "Flurana", ipa: "\\flʊ-ˈræ-nə\\", pos: "n.", def: "Floor. Literal Meaning: The lower surface of a room, on which one walks." },
+            { word: "Fona", ipa: "\\ˈfō-nə\\", pos: "num.", def: "Four (4). Literal Meaning: The quantity of four." },
+            { word: "Fonf", ipa: "\\ˈfɒnf\\", pos: "num.", def: "Five (5). Root: Derived from the German word fünf. Literal Meaning: The quantity of five." },
+            { word: "Frezell", ipa: "\\frē-ˈzel\\", pos: "n.", def: "Moon. Literal Meaning: Night beacon / Moon." },
+            { word: "Frounce", ipa: "\\ˈfraʊns\\", pos: "n.", def: "France. Literal Meaning: The country of France." },
+            { word: "Frulalortona", ipa: "\\ˌfruː-lə-lɔːr-ˈtō-nə\\", pos: "n.", def: "Chicken. Literal Meaning: A common domestic fowl raised widely for its feathers, eggs, and meat." },
+            { word: "Galtera", ipa: "\\gæl-ˈte-rə\\", pos: "n.", def: "Gambit. Literal Meaning: A calculated opening sacrifice made to gain a strategic advantage in chess; or, any calculated risk or sacrifice made in life, business, or negotiations to secure a better position later." },
+            { word: "Goloaretaxy", ipa: "\\ˌgō-lō-ə-rə-ˈtæk-sē\\", pos: "n.", def: "Galaxy. Literal Meaning: A massive, gravitationally bound system of stars, stellar remnants, interstellar gas, dust, and dark matter." },
+            { word: "Gossy [SLANG]", ipa: "\\ˈgɒ-sē\\", pos: "n.", def: "Gossip. Literal Meaning: Gossip / Casual talk." },
+            { word: "Gou", ipa: "\\ˈgoʊ\\", pos: "v.", def: "Go. Literal Meaning: Movement away from here / Go." },
+            { word: "Hahme", ipa: "\\ˈhä-meh\\", pos: "n.", def: "Home; house. Literal Meaning: Personal shelter dwelling." },
+            { word: "Hangre", ipa: "\\ˈhäŋ-grē\\", pos: "adj.", def: "Hungry. Literal Meaning: State of needing food." },
+            { word: "Happino", ipa: "\\hæ-ˈpē-nō\\", pos: "adj.", def: "Happy. Literal Meaning: State of joy or positive emotion." },
+            { word: "Haster", ipa: "\\ˈhæs-tər\\", pos: "v.", def: "Has; have [Present Possession]. Literal Meaning: Currently possessing / Holding ownership." },
+            { word: "Hastenesture", ipa: "\\hæs-tən-es-ˈtū-reh\\", pos: "n.", def: "Hastenesture. Literal Meaning: Untranslatable conceptual noun; the state of knowing that you are wrong, yet actively refusing to accept it." },
+            { word: "Heaßh [SLANG]", ipa: "\\ˈhēesh\\", pos: "interj.", def: "Hello; hi. Literal Meaning: Casual friendly recognition. Note: Used exclusively as an informal greeting for peers, friends, or family." },
+            { word: "Heclophiacosia", ipa: "\\ˌhek-lō-ˌfē-ə-ˈkō-zē-ə\\", pos: "n.", def: "The distinct, intuitive, and deeply unsettling sensation of being watched or monitored by an unseen presence, regardless of whether the feeling can be logically proven." },
+            { word: "Hertøpa", ipa: "\\hər-ˈtō-pə\\", pos: "interj.", def: "Hello; greetings. Literal Meaning: Extended respectful greeting. Note: Used as a formal greeting to address elders, strangers, or superiors to show respect." },
+            { word: "Herøt", ipa: "\\hē-ˈrōt\\", pos: "v.", def: "Hate; to dislike intensely. Literal Meaning: Total rejection / Deep aversion." },
+            { word: "Hotara", ipa: "\\hō-ˈtä-rə\\", pos: "n.", def: "Heart. Literal Meaning: The hollow muscular organ that pumps the blood through the circulatory system." },
+            { word: "Hol", ipa: "\\ˈhōl\\", pos: "pron.", def: "He [Third-Person Singular Masculine Subject Pronoun]. Literal Meaning: The male person currently spoken about." },
+            { word: "Hu", ipa: "\\ˈhü\\", pos: "adv.", def: "How. Literal Meaning: In what manner or way." },
+            { word: "Hudella", ipa: "\\huː-ˈde-lə\\", pos: "n.", def: "Head. Literal Meaning: The upper part of the human body, containing the brain, eyes, ears, nose, and mouth." },
+            { word: "Hungall", ipa: "\\əŋ-ˈgɔːl\\", pos: "v.", def: "Cook [Present]. Literal Meaning: Applying fire to food / Making a meal." },
+            { word: "Hungell", ipa: "\\əŋ-ˈgel\\", pos: "v.", def: "Cooking [Progressive]. Literal Meaning: Currently heating or making food." },
+            { word: "Hungill", ipa: "\\əŋ-ˈgīl\\", pos: "v.", def: "Cooked [Past]. Literal Meaning: Finished heating or making food" },
+            { word: "Husa", ipa: "\\ˈhuː-sə\\", pos: "n.", def: "House. Literal Meaning: A building or structure that serves as a living space or human habitation." },
+            { word: "Hß [SLANG]", ipa: "\\ˈhā-zēt\\", pos: "interj.", def: "Hello [Slang/short for informal greeting, common in texting]. Literal Meaning: Hello." },
+            { word: "Impos", ipa: "\\im-ˈpōs\\", pos: "adj.", def: "Impossible. Literal Meaning: Not possible." },
+            { word: "Inte", ipa: "\\ˈin-tə\\", pos: "prep.", def: "In; into. Root: Cognate with Germanic languages. Literal Meaning: Positioned inside or moving inward. Example: Sol amo inte fie stadtus. — She is in the town." },
+            { word: "Ispos", ipa: "\\is-ˈpōs\\", pos: "adj.", def: "Possible. Literal Meaning: Able to happen or be done." },
+            { word: "Italonia", ipa: "\\ˌi-tə-ˈlō-nē-ə\\", pos: "n.", def: "Italy. Literal Meaning: The country of Italy." },
+            { word: "Itel", ipa: "\\ˈī-tel\\", pos: "pron.", def: "I [First-Person Singular Subject Pronoun]. Literal Meaning: The self / The individual speaking." },
+            { word: "Jastuze", ipa: "\\jass-stooz-eh\\", pos: "n.", def: "Blue Jay. Literal Meaning: Blue jay bird species." },
+            { word: "Karwll", ipa: "\\ˈkär-wəl\\", pos: "v.", def: "Call. Literal Meaning: Summoning by voice or signal." },
+            { word: "Kenzee", ipa: "\\ken-ˈzē\\", pos: "n.", def: "Coffee. Literal Meaning: Dark brewed bean beverage." },
+            { word: "Koo-caw", ipa: "\\ˈkü-caw\\", pos: "n.", def: "Bird. Literal Meaning: Bird / Avian creature." },
+            { word: "Køt [SLANG]", ipa: "\\ˈkœt\\", pos: "n.", def: "Kitten; adorable cat [Casual/slang derivative of feliøne]. Literal Meaning: Little cat / Kitten." },
+            { word: "Kestralo", ipa: "\\ke-ˈstræ-lō\\", pos: "n.", def: "Religion. Literal Meaning: A structured system of worship, cosmic philosophy, and ritual tradition." },
+            { word: "Kroldar", ipa: "\\ˈkrōl-dɑːr\\", pos: "n.", def: "King. Literal Meaning: The ultimate leader piece whose capture ends a chess game; or, generally, a monarch, chief leader, or the most vital core element of an organization or project." },
+            { word: "La", ipa: "\\ˈlɑː\\", pos: "n.", def: "Leg. Literal Meaning: The lower limb of the human body used for support and movement." },
+            { word: "Lawder", ipa: "\\ˈlȯ-dər\\", pos: "n. & v.", def: "Drink; beverage / to drink. Literal Meaning: Liquid meant for drinking / Swallow fluids." },
+            { word: "Lhetter", ipa: "\\ˈlet-tər\\", pos: "adv.", def: "Towards the left; leftward. Literal Meaning: Towards the left side." },
+            { word: "Likøt", ipa: "\\lī-ˈkōt\\", pos: "v.", def: "Like; to enjoy. Literal Meaning: Finding harmony or joy in something." },
+            { word: "Lima", ipa: "\\ˈlī-mə\\", pos: "n.", def: "Lime. Literal Meaning: Sour green citrus fruit." },
+            { word: "Lota Flo", ipa: "\\ˈlō-tə flō\\", pos: "n.", def: "Lotus flower. Literal Meaning: Lotus blossom." },
+            { word: "Lumal", ipa: "\\lu̇-ˈmäl\\", pos: "n.", def: "Orange (Fruit). Literal Meaning: Sweet orange citrus fruit." },
+            { word: "Lumonal", ipa: "\\lu̇-ˈmō-nəl\\", pos: "n.", def: "Lemon. Literal Meaning: Tart yellow citrus fruit." },
+            { word: "Lurend", ipa: "\\ˈlu̇-rend\\", pos: "n.", def: "Friend. Literal Meaning: Trusted companion." },
+            { word: "Mahma", ipa: "\\ˈmä-mä\\", pos: "n.", def: "Mother; mom; mama. Literal Meaning: Maternal parent." },
+            { word: "Mak", ipa: "\\ˈmæk\\", pos: "n.", def: "Deer. Literal Meaning: A hoofed grazing or browsing mammal, where the males typically grow and shed branched antlers annually." },
+            { word: "Mana", ipa: "\\ˈmæ-nə\\", pos: "pron. & det.", def: "Me; my [First-Person Singular Object Pronoun & Possessive Determiner]. Literal Meaning: The self as a target / Belonging to the self. Note: Serves as both the objective 'me' and the possessive 'my' depending on the context. Example: Þru pourchuss a appala vu mana unda datta amo mana feliøne. — You buy an apple for me and that is my cat." },
+            { word: "Mangra", ipa: "\\ˈmæŋ-grə\\", pos: "n.", def: "Ripe mango. Literal Meaning: A sweet, fully matured mango ready for eating." },
+            { word: "Mangre", ipa: "\\ˈmæŋ-gre\\", pos: "n.", def: "Unripe mango. Literal Meaning: A green, tart, or immature mango fruit." },
+            { word: "Mangro", ipa: "\\ˈmæŋ-grō\\", pos: "n.", def: "Average mango. Literal Meaning: A standard mango; can also be used colloquially to mean 'average' or 'mediocre' in general context." },
+            { word: "Martoalar", ipa: "\\ˌmɑːr-tō-ˈɑː-lɑːr\\", pos: "n.", def: "Mime. Literal Meaning: A performer or individual who uses silent gesture, facial expression, and stylized body movement to portray a character or tell a story without speaking." },
+            { word: "Mestor", ipa: "\\ˈme-stɔːr\\", pos: "n.", def: "Grandmaster; Master player. Literal Meaning: One who has achieved the highest level of strategic skill in the game of chess; or, generally, an expert, maestro, or highly skilled master of any trade, craft, or science." },
+            { word: "Mendora", ipa: "\\men-ˈdɔː-rə\\", pos: "v. & n.", def: "Pray; prayer. Literal Meaning: To communicate with the higher realm; a spiritual request or devotion." },
+            { word: "Merascopia", ipa: "\\ˌme-rə-ˈskō-pē-ə\\", pos: "n.", def: "Microscope. Literal Meaning: An optical instrument used for viewing very small objects." },
+            { word: "Mich", ipa: "\\ˈmik\\", pos: "adj.", def: "Good [Neutral/Uninflected root]. Literal Meaning: Correct state / Favorable condition." },
+            { word: "Micha", ipa: "\\ˈmī-kə\\", pos: "adj.", def: "Good [Feminine variant]. Literal Meaning: Correct state [Feminine agreement]." },
+            { word: "Michø", ipa: "\\ˈmī-kō\\", pos: "adj.", def: "Good [Masculine variant]. Literal Meaning: Correct state [Masculine agreement]." },
+            { word: "Micruradiowavah", ipa: "\\ˌmaɪ-kroʊ-ˌreɪ-di-oʊ-ˈwɑː-və\\", pos: "n.", def: "Microwave. Literal Meaning: An appliance that cooks or heats food using electromagnetic radiation." },
+            { word: "Mikondrahlo", ipa: "\\ˌmī-kōn-ˈdrä-lō\\", pos: "n.", def: "Mitochondria. Literal Meaning: The organelle or power-producing structure of a cell." },
+            { word: "Mita", ipa: "\\ˈmē-tə\\", pos: "prep.", def: "With. Root: Derived from the German word mit. Literal Meaning: Accompanied by / Together with." },
+            { word: "Mitalo", ipa: "\\mē-ˈtä-lō\\", pos: "prep.", def: "Without. Literal Meaning: Accompanied by nothing / Missing." },
+            { word: "Moce", ipa: "\\ˈmō-seh\\", pos: "v.", def: "Make; create. Literal Meaning: Bringing an object into reality." },
+            { word: "Morde", ipa: "\\ˈmȯr-deh\\", pos: "n.", def: "Food. Literal Meaning: Sustenance meant to be chewed." },
+            { word: "Mude", ipa: "\\ˈmü-deh\\", pos: "v.", def: "Sculpt. Root: Derived from the English word mud. Literal Meaning: Shaping raw earth / Shaping clay mud." },
+            { word: "Mussrom", ipa: "\\ˈməs-rüm\\", pos: "n.", def: "Mushroom. Literal Meaning: Fungal growth food / Mushroom cap." },
+            { word: "Mutta", ipa: "\\ˈmʌ-tə\\", pos: "adv., adj., & det.", def: "Much; many; a lot. Literal Meaning: A large unspecific quantity / Much." },
+            { word: "Na [SLANG]", ipa: "\\ˈnæ\\", pos: "adv. & det.", def: "No [Slang/shortened informal negative]. Literal Meaning: No / Not." },
+            { word: "Nettør", ipa: "\\ˈne-tȯr\\", pos: "adv., det., & copula.", def: "No; not; isn't; never [Negative Particle]. Literal Meaning: The absence of correctness / Absolute zero state." },
+            { word: "Nevos", ipa: "\\ˈnā-vōs\\", pos: "interj.", def: "Bye; goodbye. Literal Meaning: Parting well-wishes." },
+            { word: "Nocallor", ipa: "\\nō-ˈkæ-lɔːr\\", pos: "n.", def: "Knight. Literal Meaning: The leaping, L-shaped cavalry piece in chess; or, a defender, mobile agent, or someone who bypasses obstacles to accomplish a task." },
+            { word: "Nona", ipa: "\\ˈnō-nə\\", pos: "num.", def: "Nine (9). Literal Meaning: The quantity of nine." },
+            { word: "Nis / Nus", ipa: "\\ˈnis / ˈnüs\\", pos: "adv.", def: "Now. Literal Meaning: At this current split second." },
+            { word: "Nün", ipa: "\\ˈnyn\\", pos: "pron. & det.", def: "None; no one. Literal Meaning: Zero count of entities / Not one." },
+            { word: "Ois", ipa: "\\ˈoys\\", pos: "n.", def: "Ice. Literal Meaning: Frozen water solid / Ice." },
+            { word: "Oisa-Cremosa", ipa: "\\ˈoy-sə-krā-ˈmō-sə\\", pos: "n.", def: "Ice cream. Literal Meaning: Frozen cream dessert / Ice cream." },
+            { word: "Olu", ipa: "\\ˈō-lü\\", pos: "num.", def: "One (1). Literal Meaning: The single unit." },
+            { word: "Onao", ipa: "\\ō-ˈnā-ō\\", pos: "conj.", def: "Or. Literal Meaning: The alternate path / Selection option." },
+            { word: "Ooven", ipa: "\\ˈuː-vən\\", pos: "n.", def: "Oven. Literal Meaning: An enclosed compartment for cooking and heating food." },
+            { word: "Otrola", ipa: "\\ō-ˈtrō-lə\\", pos: "prep.", def: "Of. Literal Meaning: Expressing the relationship between a part and a whole, or indicating origin." },
+            { word: "Øruse", ipa: "\\ˈdrüs\\", pos: "v.", def: "Confuse. Literal Meaning: Making thoughts cloudy / Tangling understanding." },
+            { word: "Ørused", ipa: "\\ˈdrüst\\", pos: "adj.", def: "Confused. Literal Meaning: Trapped in a state of cloudy tangled thoughts." },
+            { word: "Øruselling", ipa: "\\ˈdrü-sel-iŋ\\", pos: "adj.", def: "Confusing. Literal Meaning: Displaying properties that actively tangle thoughts." },
+            { word: "Ørvalisch", ipa: "\\œr-ˈvä-lish\\", pos: "n.", def: "Ørvalisch. Literal Meaning: The name of the language itself." },
+            { word: "Ørvalis", ipa: "\\œr-ˈvä-lis\\", pos: "n & v.", def: "Ørvalisch speaker / Speaking in Ørvalisch. Literal Meaning: An individual capable of speaking the language. Also literally means 'the language of those who know'." },
+            { word: "Ørvalischfloog", ipa: "\\œr-ˈvä-lish-flüg\\", pos: "n.", def: "Ørvalisch flag. Literal Meaning: The national banner design of the language community." },
+            { word: "Panke tri", ipa: "\\ˈpän-kā ˈtrē\\", pos: "phrase.", def: "Thank you [General Formula of Courtesy]. Root: Fused compound of pankø (thanks) and tri (inflected form of Þru, you)." },
+            { word: "Pankø", ipa: "\\ˈpän-kō\\", pos: "interj.", def: "Thanks [Informal Exclamation]. Literal Meaning: Slight appreciation." },
+            { word: "Pascalo", ipa: "\\pæ-ˈskæ-lō\\", pos: "n.", def: "Pawn. Literal Meaning: A frontline foot soldier and foundational piece on the chess board; or, a lower-ranking worker or minor agent used to achieve a goal." },
+            { word: "Perløta", ipa: "\\pər-ˈlō-tə\\", pos: "interj.", def: "Thanks [Formal Exclamation]. Literal Meaning: Highest deep appreciation." },
+            { word: "Pizze", ipa: "\\ˈpēt-seh\\", pos: "n.", def: "Pizza. Literal Meaning: Flatbread baked with cheese and sauce toppings." },
+            { word: "Plist", ipa: "\\ˈplist\\", pos: "adv.", def: "Please. Literal Meaning: A form of respect spoken when asking for something." },
+            { word: "Pourchuss", ipa: "\\ˈpōr-chəs\\", pos: "v.", def: "Purchase; buy. Literal Meaning: Transaction for ownership / Buy." },
+            { word: "Prioda", ipa: "\\prē-ˈō-də\\", pos: "adj.", def: "Periodic. Literal Meaning: Appearing or occurring at intervals." },
+            { word: "Qalla", ipa: "\\cwall-ah\\", pos: "n.", def: "Question. Literal Meaning: Inquiry / Question." },
+            { word: "Qalloo", ipa: "\\cwall-ooh\\", pos: "n.", def: "Answer. Literal Meaning: Response to an inquiry / Answer." },
+            { word: "Quenara", ipa: "\\kwə-ˈnɑː-rə\\", pos: "n.", def: "Queen. Literal Meaning: The most powerful, versatile, and wide-ranging piece on the chess board; or, the most influential force within a group." },
+            { word: "Resipablota", ipa: "\\rə-ˌsi-pə-ˈblō-tə\\", pos: "n.", def: "Recipe. Literal Meaning: A set of instructions or ingredients for preparing food or compiling elements." },
+            { word: "Rhetter", ipa: "\\ˈret-tər\\", pos: "adv.", def: "Towards the right; rightward. Literal Meaning: Towards the right side." },
+            { word: "Rofalato", ipa: "\\ˌrō-fə-ˈlɑː-tō\\", pos: "n.", def: "Ceiling. Literal Meaning: The upper interior surface of a room." },
+            { word: "Rosa Flo", ipa: "\\ˈrō-zə flō\\", pos: "n.", def: "Rose flower. Literal Meaning: Thorny sweet rose blossom." },
+            { word: "Sall", ipa: "\\ˈsɔːl\\", pos: "pron., adj., & det.", def: "All. Literal Meaning: Total sum of elements / Every single one." },
+            { word: "Sattona", ipa: "\\æ-ˈtō-nə\\", pos: "adj.", def: "Sad. Literal Meaning: State of sorrow or low spirit." },
+            { word: "Scalottentia", ipa: "\\ˌskæ-lə-ˈten-shē-ə\\", pos: "n.", def: "Science. Literal Meaning: The systematic study of the structure and behavior of the physical and natural world." },
+            { word: "Scatra", ipa: "\\ˈskæ-trə\\", pos: "n.", def: "Chess. Literal Meaning: The traditional board game of visual strategy; a pastime so deeply embedded in the culture that it serves as the origin for countless everyday idioms." },
+            { word: "Schweinamokalak", ipa: "\\ˌʃwaɪ-nə-ˌmɒ-kə-ˈlæk\\", pos: "n.", def: "Pig. Literal Meaning: An omnivorous, hoofed domestic mammal with a stout body, thick skin, and a flat snout." },
+            { word: "Schporte", ipa: "\\ˈshpōr-teh\\", pos: "n.", def: "Sport. Literal Meaning: Structured physical play game." },
+            { word: "Schportze", ipa: "\\ˈshpōrt-seh\\", pos: "n.", def: "Sports. Literal Meaning: Multiple games of physical play." },
+            { word: "Scoorl", ipa: "\\ˈskü-rəl\\", pos: "n.", def: "School. Literal Meaning: Gathering point for learning." },
+            { word: "Scrollatiteacad", ipa: "\\ˌskrō-lə-tē-tē-ˈæ-kæd\\", pos: "n. & v.", def: "Coding; programming. Literal Meaning: The act of writing technical code or instructions for computers and systems." },
+            { word: "Shose", ipa: "\\ˈshō-seh\\", pos: "n.", def: "Shop; market; store. Literal Meaning: Trade stationhouse / Marketplace shop." },
+            { word: "Sievena", ipa: "\\sē-ˈeh-və-nə\\", pos: "num.", def: "Seven (7). Literal Meaning: The quantity of seven." },
+            { word: "Sokeranas", ipa: "\\ˌsoʊ-kə-ˈræ-nəs\\", pos: "n. & v.", def: "Sink. Literal Meaning: (n.) A fixed basin with a water supply; (v.) to descend below the surface of a liquid." },
+            { word: "Sola", ipa: "\\ˈsō-lə\\", pos: "num.", def: "Six (6). Literal Meaning: The quantity of six." },
+            { word: "Sol", ipa: "\\ˈsōl\\", pos: "pron.", def: "She [Third-Person Singular Feminine Subject Pronoun]. Literal Meaning: The female person currently spoken about." },
+            { word: "Soonus", ipa: "\\ˈsü-nüs\\", pos: "adv.", def: "Soon; later. Literal Meaning: Forward ticking time / Shortly hereafter." },
+            { word: "Sotro", ipa: "\\ˈsō-trō\\", pos: "n.", def: "Candy; sweets; treats. Literal Meaning: Crystallized sugar treat." },
+            { word: "Srohter", ipa: "\\ˈsrō-tər\\", pos: "n.", def: "Sister. Literal Meaning: Female sibling." },
+            { word: "Stadtus", ipa: "\\ˈstäd-tüs\\", pos: "n.", def: "Town. Root: Derived from the German word Stadt (city). Literal Meaning: Gathered community dynamic borough." },
+            { word: "Stalmarac", ipa: "\\ˌstæl-mə-ˈræk\\", pos: "n. & v.", def: "Stalemate. Literal Meaning: A locked draw in chess where no legal moves can be made; or, a complete deadlock, standstill, or impasse." },
+            { word: "Stamino", ipa: "\\stə-ˈmē-nō\\", pos: "v.", def: "Run; speed [Present]. Literal Meaning: To walk fast with energy." },
+            { word: "Stamine", ipa: "\\stə-ˈmē-neh\\", pos: "v.", def: "Ran; sped [Past]. Literal Meaning: Walked fast with energy in previous time." },
+            { word: "Staminu", ipa: "\\stə-ˈmē-nü\\", pos: "v.", def: "Running; speeding [Progressive]. Literal Meaning: Actively performing an energetic fast walk." },
+            { word: "Stelemalatalla", ipa: "\\stə-ˌle-mə-lə-ˈtæ-lə\\", pos: "n.", def: "Metal; steel. Literal Meaning: Any metallic element or alloy, especially steel or refined structural metal." },
+            { word: "Stomas", ipa: "\\ˈstɒm-əs\\", pos: "n.", def: "Stomach. Literal Meaning: The internal organ where the major part of digestion occurs." },
+            { word: "Stotertac", ipa: "\\ˌstō-tər-ˈtæk\\", pos: "n.", def: "States [Plural]. Literal Meaning: Political territories or federal divisions of a nation." },
+            { word: "Sprakulatur", ipa: "\\ˌspræ-kyə-ˈlɑː-tʃər\\", pos: "v.", def: "Speak. Literal Meaning: To utter words or articulate thoughts using vocal sounds." },
+            { word: "Tak", ipa: "\\ˈtæk\\", pos: "v.", def: "Taking; grabbing [Progressive]. Literal Meaning: Actively clasping an object." },
+            { word: "Tangre", ipa: "\\ˈtäŋ-grē\\", pos: "adj.", def: "Thirsty. Literal Meaning: State of needing liquid replenishment." },
+            { word: "Terø", ipa: "\\ˈtā-rō\\", pos: "n.", def: "Tea. Literal Meaning: Steeped leaf drink / Herbal tea infusion." },
+            { word: "Tersalla", ipa: "\\tər-ˈsæ-lə\\", pos: "adj.", def: "Holy; sacred. Literal Meaning: Consecrated, pure, or set apart for divine purposes." },
+            { word: "Thatonos", ipa: "\\θæ-ˈtō-nōs\\", pos: "pron. & det.", def: "That [Formal Demonstrative]. Literal Meaning: The specified distant entity. Note: Used respectfully for elders, strangers, or official contexts." },
+            { word: "Toa", ipa: "\\ˈtō-ə\\", pos: "num.", def: "Two (2). Literal Meaning: The double unit." },
+            { word: "Tok", ipa: "\\ˈtɒk\\", pos: "v.", def: "Took; grabbed [Past]. Literal Meaning: Clasping an object in previous time." },
+            { word: "Tol", ipa: "\\ˈtōl\\", pos: "pron.", def: "They [Third-Person Plural Subject Pronoun]. Literal Meaning: The grouping of persons spoken about." },
+            { word: "Tovera", ipa: "\\tō-ˈve-rə\\", pos: "adv.", def: "There. Literal Meaning: In, at, or to that place or position." },
+            { word: "Tomaca", ipa: "\\tō-ˈmä-kə\\", pos: "det. & pron.", def: "Their. Literal Meaning: Belonging to or associated with the people or things previously mentioned." },
+            { word: "Tonalla", ipa: "\\tō-ˈnæ-lə\\", pos: "num.", def: "Three (3). Literal Meaning: The triple unit." },
+            { word: "Tonallos", ipa: "\\tō-ˈnæ-lōs\\", num: "Ten (10).", def: "The complete count of ten digits." },
+            { word: "Tuble", ipa: "\\ˈtə-bəl\\", pos: "n.", def: "Table. Literal Meaning: An arrangement of data in rows and columns. Note: Combined as 'Prioda Tuble', this translates directly to Periodic Table." },
+            { word: "Tuk", ipa: "\\ˈtük\\", pos: "v.", def: "Take; grab [Present]. Literal Meaning: Clasping onto an object into possession." },
+            { word: "Tutha", ipa: "\\ˈtuː-θə\\", pos: "n.", def: "Tooth. Literal Meaning: A hard, bony structure in the jaws used for biting and chewing." },
+            { word: "Twistorallakno", ipa: "\\ˌtwis-tər-ˈæ-lək-nō\\", pos: "n.", def: "Knob. Literal Meaning: A rounded dial or handle, especially one used to operate a door or device." },
+            { word: "Þeutsany", ipa: "\\ˈdoɪt-sä-nē\\", pos: "n.", def: "Germany. Root: From German Deutschland with a modified suffix. Literal Meaning: The state boundary line of Germany." },
+            { word: "Þør", ipa: "\\ˈdȯr\\", pos: "det.", def: "The [Definite Article]. Literal Meaning: The precise identified target noun." },
+            { word: "Þru", ipa: "\\ˈtrü\\", pos: "pron.", def: "You [Second-Person Singular Subject Pronoun]. Note: Inflects to tri when bound in object formulas like Panke tri." },
+            { word: "Þu", ipa: "\\ˈdü\\", pos: "v.", def: "Do [Universal auxiliary verb]. Literal Meaning: Execution of an action." },
+            { word: "Þrohter", ipa: "\\ˈdrō-tər\\", pos: "n.", def: "Daughter. Literal Meaning: Female direct child offspring." },
+            { word: "Umericola", ipa: "\\yu-ˌme-ri-ˈkō-lə\\", pos: "n.", def: "America. Literal Meaning: The landmass or nation of America." },
+            { word: "Unda", ipa: "\\ˈün-də\\", pos: "conj.", def: "And. Root: Derived from the German word und. Literal Meaning: Joined alongside / In addition to." },
+            { word: "Unita", ipa: "\\yu-ˈnē-tə\\", pos: "adj.", def: "United. Literal Meaning: Joined together, merged, or politically unified." },
+            { word: "Unita Stotertac Otrola Umericola", ipa: "\\yu-ˈnē-tə ˌstō-tər-ˈtæk ō-ˈtrō-lə yu-ˌme-ri-ˈkō-lə\\", pos: "n.", def: "United States of America. Literal Meaning: The federal republic composed of fifty states; the USA." },
+            { word: "Urmostallana", ipa: "\\ˌɜːr-mə-ˈstæ-lə-nə\\", pos: "n.", def: "Arm. Literal Meaning: The upper limb of the human body." },
+            { word: "Utn", ipa: "\\ˈətn\\", pos: "adv. & prep.", def: "Up. Literal Meaning: Moving or pointing toward a higher position." },
+            { word: "Vaccamona", ipa: "\\ˌvæ-kə-ˈmō-nə\\", pos: "n.", def: "Cow. Literal Meaning: A fully grown female domestic bovine animal." },
+            { word: "Vair", ipa: "\\ˈvār\\", pos: "adv.", def: "Very. Literal Meaning: Highly / To a great degree." },
+            { word: "Ve", ipa: "\\ˈvē\\", pos: "pron.", def: "We [First-Person Plural Subject Pronoun]." },
+            { word: "Vey", ipa: "\\ˈvā\\", pos: "pron.", def: "They [Third-Person Plural Subject Pronoun]. Parallel form alongside tol." },
+            { word: "Villano", ipa: "\\vih-ˈlɑː-nō\\", pos: "n.", def: "Village. Literal Meaning: Rural collection of homes / Country community village." },
+            { word: "Villanos", ipa: "\\vih-ˈlɑː-nōs\\", pos: "n. & adj.", def: "Villain; bad; evil. Literal Meaning: Evil creature / Corrupt alignment." },
+            { word: "Visorus", ipa: "\\vih-ˈzō-rüs\\", pos: "v.", def: "Look; see; observe; view [Present]. Literal Meaning: Casting eyes directly on an object." },
+            { word: "Visorul", ipa: "\\vih-ˈzō-rül\\", pos: "v.", def: "Looking; seeing; observing [Progressive]. Literal Meaning: Actively holding visual focus on an item." },
+            { word: "Visora", ipa: "\\vih-ˈzō-rä\\", pos: "v.", def: "Looked; saw; observed [Past]. Literal Meaning: Cast eyes on an object in previous time." },
+            { word: "Vit", ipa: "\\ˈvīt\\", pos: "pron.", def: "It [Third-Person Singular Neuter Subject/Object Pronoun]." },
+            { word: "Vollinar", ipa: "\\ˈvɒ-lɪ-nɑːr\\", pos: "n.", def: "Faith; deep belief. Literal Meaning: An unshakeable internal certainty or trust in the divine." },
+            { word: "Vu", ipa: "\\ˈvü\\", pos: "prep.", def: "To; towards. Literal Meaning: Vector movement heading directly for." },
+            { word: "Vulpesgull", ipa: "\\ˈvʊl-pes-gʌl\\", pos: "n.", def: "Fox. Literal Meaning: A small, carnivorous mammal recognized by its pointed muzzle and clever nature." },
+            { word: "Walestamanekall", ipa: "\\ˌwā-ləs-tə-ˈmæ-nə-kɔːl\\", pos: "n.", def: "Wall. Literal Meaning: A continuous vertical structure that encloses or divides an area." },
+            { word: "Walch", ipa: "\\ˈwälch\\", pos: "v.", def: "Walk. Literal Meaning: Moving step by step at standard pace." },
+            { word: "Walt", ipa: "\\ˈwält\\", pos: "v.", def: "Watch. Literal Meaning: Keeping continuous protective or alert visual track of." },
+            { word: "Wass", ipa: "\\ˈwäs\\", pos: "v.", def: "Wait. Literal Meaning: Pause in expectation / Hold time." },
+            { word: "Waster", ipa: "\\ˈwäs-tər\\", pos: "v.", def: "Was; were [Universal Past Copula]. Literal Meaning: Past state of existence." },
+            { word: "Waßte", ipa: "\\ˈwäs-teh\\", pos: "n.", def: "Water. Literal Meaning: Earth's vital liquid moisture fluid." },
+            { word: "Waz / Wer", ipa: "\\ˈwäz / ˈwār\\", pos: "adv.", def: "Where. Literal Meaning: Pointing out the precise spatial grid location." },
+            { word: "Wo / Wot", ipa: "\\ˈwō / ˈwät\\", pos: "pron. & det.", def: "What. Literal Meaning: Asking for the identity of an object or concept." },
+            { word: "Wohpe", ipa: "\\ˈwō-peh\\", pos: "adv.", def: "Why. Literal Meaning: Pursuing the root reason of a matter." },
+            { word: "XXty", ipa: "\\cs-tie\\", pos: "n.", def: "Piano. Literal Meaning: Musical keyboard instrument / Piano." },
+            { word: "Yat", ipa: "\\ˈyät\\", pos: "adv.", def: "Yes [Affirmative Particle]. Literal Meaning: Complete agreement." },
+            { word: "Yolstaff", ipa: "\\yol-staff\\", pos: "n.", def: "Elder. Literal Meaning: Highly respected senior or older community member." },
+            { word: "Zenna", ipa: "\\zen-ah\\", pos: "n.", def: "Female Zebra. Literal Meaning: Striped equine animal [Feminine]." },
+            { word: "Zetta", ipa: "\\zet-ah\\", pos: "n.", def: "Male Zebra. Literal Meaning: Striped equine animal [Masculine]." },
+            { word: "Zelodardag", ipa: "\\ˌze-lō-ˈdɑːr-dæg\\", pos: "n.", def: "Lizard. Literal Meaning: A widespread reptile possessing a scaly body and long tail." },
+            { word: "Zock", ipa: "\\ˈzɒk\\", pos: "adj. & n.", def: "Shocker; confusing; mesmerizing. Literal Meaning: Mesmerizing surprise / Shocker." },
+            { word: "Zus", ipa: "\\ˈzüs\\", pos: "pron.", def: "Us [First-Person Plural Object Pronoun]." },
+            { word: "Zutterack", ipa: "\\ˈzüt-ər-æk\\", pos: "n.", def: "Sugar. Literal Meaning: Sweet crystalline substance / Granulated sugar." },
+            { word: "- 𐦠", ipa: "", pos: "suffix", def: "Plural suffix. Affixed directly to the end of any countable noun to indicate plurality. Example: appala (apple) → appala 𐦠 (apples)." }
+        ];
+
+        // Function to build out HTML items dynamically
+        function loadDictionary() {
+            const listContainer = document.getElementById('dictionaryList');
+            listContainer.innerHTML = ''; // Reset container
+
+            dictionaryData.forEach((item) => {
+                const itemDiv = document.createElement('div');
+                itemDiv.className = 'dict-item';
+                // Store structural tags inside attributes for rapid search queries
+                itemDiv.setAttribute('data-search', `${item.word} ${item.def}`.toLowerCase());
+
+                itemDiv.innerHTML = `
+                    <span class="word-title">${item.word}</span> 
+                    <span class="word-pron">${item.ipa}</span> - 
+                    <span class="word-pos">${item.pos}</span>
+                    <br>${item.def}
+                `;
+                listContainer.appendChild(itemDiv);
+            });
+        }
+
+        // Live filtration function
+        function searchDict() {
+            let input = document.getElementById('searchBar').value.toLowerCase();
+            let items = document.getElementsByClassName('dict-item');
+            
+            for (let i = 0; i < items.length; i++) {
+                let searchTarget = items[i].getAttribute('data-search');
+                if (searchTarget.includes(input)) {
+                    items[i].style.display = "";
+                } else {
+                    items[i].style.display = "none";
+                }
+            }
+        }
+
+        // Initialize the dataset automatically on page load
+        window.onload = loadDictionary;
+    </script>
+</body>
+</html>
