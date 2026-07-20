@@ -155,6 +155,13 @@
             font-weight: 600;
         }
 
+        h3 {
+            color: var(--primary-blue);
+            margin-top: 25px;
+            margin-bottom: 15px;
+            font-size: 1.2rem;
+        }
+
         section p {
             color: var(--text-secondary);
             margin: 0 0 15px;
@@ -230,6 +237,53 @@
             color: var(--text-secondary);
             margin-top: 6px;
             font-size: 0.95rem;
+        }
+
+        /* Phonology Chart Styles */
+        .phoneme-chart {
+            margin: 20px 0;
+            overflow-x: auto;
+        }
+
+        .phoneme-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+
+        .phoneme-table th,
+        .phoneme-table td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: center;
+        }
+
+        .phoneme-table th {
+            background-color: #e8eef5;
+            color: var(--primary-blue);
+            font-weight: 600;
+        }
+
+        .phoneme-table td {
+            background-color: #fafbfc;
+        }
+
+        .phoneme-label {
+            font-weight: 600;
+            text-align: left;
+            background-color: #e8eef5;
+        }
+
+        .feature-box {
+            background: #f9f9f9;
+            border-left: 4px solid var(--accent-gold);
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 3px;
+        }
+
+        .feature-box strong {
+            color: var(--primary-blue);
         }
 
         /* Translator Styles */
@@ -384,6 +438,15 @@
                 grid-template-columns: 1fr;
             }
 
+            .phoneme-table {
+                font-size: 0.85rem;
+            }
+
+            .phoneme-table th,
+            .phoneme-table td {
+                padding: 8px;
+            }
+
             h1 {
                 font-size: 2rem;
             }
@@ -410,6 +473,7 @@
         <div class="sidebar">
             <h3>Menu</h3>
             <div class="sidebar-item active" data-section="about">About</div>
+            <div class="sidebar-item" data-section="phonology">Phonology</div>
             <div class="sidebar-item" data-section="dictionary">Dictionary</div>
             <div class="sidebar-item" data-section="translator">Translator</div>
         </div>
@@ -418,8 +482,155 @@
             
             <section id="about" class="active">
                 <h2>About Ørvalisch</h2>
-                <p><strong>Ørvalisch</strong> is a constructed language built on strategic, linguistic, and cultural foundations. Its visual identity centers on a distinctive orthography that blends Nordic influences with carefully chosen phonetic elements.</p>
-                <p>Whether you're here to explore the lexicon, understand the grammar, or simply appreciate the craft behind a constructed language, you'll find a community of speakers committed to keeping this unique tongue alive and evolving.</p>
+                <p><strong>Ørvalisch</strong> is a constructed language built on strategic, linguistic, and cultural foundations. Its visual identity centers on a distinctive orthography that blends elements from Germanic and Romance language families, creating a unique aesthetic.</p>
+                <p>Whether you're here to explore the lexicon, understand the grammar, or simply appreciate the craft behind a constructed language, you'll find a community of speakers committed to preserving and developing this intricate system of communication.</p>
+            </section>
+
+            <section id="phonology">
+                <h2>Phonology</h2>
+                <p>Ørvalisch features a rich phonological system with both standard consonants and vowels, as well as several special characters that carry unique pronunciations.</p>
+
+                <h3>Consonants</h3>
+                <div class="phoneme-chart">
+                    <table class="phoneme-table">
+                        <thead>
+                            <tr>
+                                <th>Manner/Place</th>
+                                <th>Labial</th>
+                                <th>Alveolar</th>
+                                <th>Palatal</th>
+                                <th>Velar</th>
+                                <th>Glottal</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="phoneme-label">Stops</td>
+                                <td>p, b</td>
+                                <td>t, d</td>
+                                <td></td>
+                                <td>k, g</td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td class="phoneme-label">Fricatives</td>
+                                <td>f, v</td>
+                                <td>s, z</td>
+                                <td>ʃ (sh)</td>
+                                <td>x</td>
+                                <td>h</td>
+                            </tr>
+                            <tr>
+                                <td class="phoneme-label">Affricates</td>
+                                <td></td>
+                                <td>ts</td>
+                                <td>tʃ (ch)</td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td class="phoneme-label">Nasals</td>
+                                <td>m</td>
+                                <td>n</td>
+                                <td></td>
+                                <td>ŋ (ng)</td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td class="phoneme-label">Approximants</td>
+                                <td>w</td>
+                                <td>r, l</td>
+                                <td>j (y)</td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <h3>Vowels</h3>
+                <div class="phoneme-chart">
+                    <table class="phoneme-table">
+                        <thead>
+                            <tr>
+                                <th colspan="2">Front</th>
+                                <th colspan="2">Central</th>
+                                <th colspan="2">Back</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="phoneme-label">Close</td>
+                                <td>i (ee)</td>
+                                <td>ü (oo with rounded lips)</td>
+                                <td>ə (schwa)</td>
+                                <td>u (oo)</td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td class="phoneme-label">Mid</td>
+                                <td>e (eh)</td>
+                                <td>ø (eu sound)</td>
+                                <td>ə (schwa)</td>
+                                <td>o (oh)</td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td class="phoneme-label">Open</td>
+                                <td>æ (ash)</td>
+                                <td></td>
+                                <td>a (ah)</td>
+                                <td></td>
+                                <td>ɑ (broad a)</td>
+                                <td></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <h3>Special Characters & Phonetic Features</h3>
+                
+                <div class="feature-box">
+                    <strong>ß (Eszett)</strong>
+                    <p>This character has context-dependent pronunciation:</p>
+                    <ul>
+                        <li><strong>Standard: /z/ (z sound)</strong> — Most common usage, as in "ßacht" (night)</li>
+                        <li><strong>With vowels: /bs/ or /bz/ blend</strong> — Creates a complex sibilant, as in "ßai" (blue) pronounced "bsī" or "bzī"</li>
+                        <li>The ß serves as a unifying element across Germanic linguistic roots</li>
+                    </ul>
+                </div>
+
+                <div class="feature-box">
+                    <strong>Ø (O with stroke)</strong>
+                    <p>Represents the German-influenced "ø" sound, a rounded front vowel similar to French "eu". Examples:</p>
+                    <ul>
+                        <li>Betøl (beetle)</li>
+                        <li>Crøbe (crab)</li>
+                        <li>Terø (tea)</li>
+                    </ul>
+                </div>
+
+                <div class="feature-box">
+                    <strong>Þ (Thorn)</strong>
+                    <p>An Old English/Icelandic character representing the "th" sound (/θ/ or /ð/). Examples:</p>
+                    <ul>
+                        <li>Þeutsany (Germany)</li>
+                        <li>Þru (you)</li>
+                        <li>Þu (do)</li>
+                    </ul>
+                </div>
+
+                <div class="feature-box">
+                    <strong>Diphthongs & Complex Vowels</strong>
+                    <p>Ørvalisch employs several diphthongs for richer expression:</p>
+                    <ul>
+                        <li>/aɪ/ (like "I" in English) — as in certain word stress patterns</li>
+                        <li>/aʊ/ (like "ou" in English) — appearing in borrowed or specialized terms</li>
+                        <li>/ɔɪ/ (like "oy" in English) — creating distinctive tonal qualities</li>
+                    </ul>
+                </div>
             </section>
 
             <section id="dictionary">
@@ -474,7 +685,7 @@
             { word: "Abota", ipa: "\\e-ˈbō-te\\", pos: "adv. & prep.", def: "About; concerning. Can mean both 'on the topic of' and 'approximately.'" },
             { word: "Aeternustapo", ipa: "\\ā-tər-nəs-ˈtæ-pō\\", pos: "adv., adj., & n.", def: "Forever; eternal; endless time. Implies continuous, unbroken duration." },
             { word: "Amo", ipa: "\\ˈæ-mō\\", pos: "v.", def: "Am; is; are. The primary present-tense copula linking subjects to their state." },
-            { word: "AP", ipa: "\\ˈā-ˈpē\\", pos: "n.", def: "AI; artificial intelligence. Modern abbreviation for machine-based reasoning." },
+            { word: "AP", ipa: "\\ˈā-ˈpē\\", pos: "n. (abbr.)", def: "AI; artificial intelligence. Modern abbreviation for machine-based reasoning." },
             { word: "Aponal", ipa: "\\ˈæ-pə-næl\\", pos: "n.", def: "Monkey. A small primate known for dexterity and social complexity." },
             { word: "Appala", ipa: "\\ˈæ-pə-lə\\", pos: "n.", def: "Apple. The fruit." },
             { word: "Arrascala", ipa: "\\ə-ˈræ-skə-lə\\", pos: "v.", def: "Are (copula variant). Plural or second-person form of 'to be.'" },
@@ -488,14 +699,14 @@
             { word: "Betøl", ipa: "\\ˈbā-tøl\\", pos: "n.", def: "Beetle. An insect with hardened front wings." },
             { word: "Bolliabis", ipa: "\\ˌbɒ-lē-ˈɑː-bɪs\\", pos: "n.", def: "Bison; bull. A large, powerful horned mammal." },
             { word: "Bowcas", ipa: "\\ˈboʊ-kæs\\", pos: "conj.", def: "Because. Introduces a reason or cause." },
-            { word: "Brav [SLANG]", ipa: "\\ˈbræv\\", pos: "adj. & interj.", def: "Slang for bravo or brilliant. Expression of disbelief or amazement." },
+            { word: "Brav", ipa: "\\ˈbræv\\", pos: "adj. & interj.", def: "Bravo; brilliant. Expression of amazement or approval." },
             { word: "Brohter", ipa: "\\ˈbrō-tər\\", pos: "n.", def: "Brother. Male sibling." },
             { word: "Brood", ipa: "\\ˈbrüd\\", pos: "n.", def: "Bread. Baked dough staple." },
             { word: "Burnell", ipa: "\\bər-ˈnel\\", pos: "n.", def: "Sun. The burning celestial orb." },
             { word: "ßacht", ipa: "\\ˈzäkt\\", pos: "n.", def: "Night (masculine). Derived from German Nacht." },
             { word: "ßai", ipa: "\\ˈbzī\\ or \\ˈbsī\\", pos: "adj. & n.", def: "Blue. The color, with a complex sibilant sound." },
             { word: "ßicht", ipa: "\\ˈzīkt\\", pos: "n.", def: "Night (feminine). The feminine agreement form." },
-            { word: "ßT [SLANG]", ipa: "\\ˈzē-tē\\", pos: "n.", def: "Night (casual). Gender-neutral short form." },
+            { word: "ßT", ipa: "\\ˈzē-tē\\", pos: "n. (abbr.)", def: "Night (gender-neutral). Short form abbreviation." },
             { word: "ßtagg", ipa: "\\ˈstäg\\", pos: "n.", def: "Morning (masculine). Early daylight hours." },
             { word: "ßtakk", ipa: "\\ˈßtäk\\", pos: "n.", def: "Morning (feminine). Feminine form of morning." },
             { word: "CCacku", ipa: "\\ˈkæ-kü\\", pos: "n.", def: "Cake. Sweet baked dessert." },
@@ -555,14 +766,14 @@
             { word: "Frulalortona", ipa: "\\ˌfruː-lə-lɔːr-ˈtō-nə\\", pos: "n.", def: "Chicken. Common domestic fowl." },
             { word: "Galtera", ipa: "\\gæl-ˈte-rə\\", pos: "n.", def: "Gambit. A strategic chess opening sacrifice." },
             { word: "Goloaretaxy", ipa: "\\ˌgō-lō-ə-rə-ˈtæk-sē\\", pos: "n.", def: "Galaxy. A massive system of stars and matter." },
-            { word: "Gossy [SLANG]", ipa: "\\ˈgɒ-sē\\", pos: "n.", def: "Gossip. Informal talk or rumors." },
+            { word: "Gossy", ipa: "\\ˈgɒ-sē\\", pos: "n.", def: "Gossip. Informal talk or rumors." },
             { word: "Gou", ipa: "\\ˈgoʊ\\", pos: "v.", def: "Go. To move away or depart." },
             { word: "Hahme", ipa: "\\ˈhä-meh\\", pos: "n.", def: "Home; house. One's personal dwelling." },
             { word: "Hangre", ipa: "\\ˈhäŋ-grē\\", pos: "adj.", def: "Hungry. In need of food." },
             { word: "Happino", ipa: "\\hæ-ˈpē-nō\\", pos: "adj.", def: "Happy. In a state of joy or contentment." },
             { word: "Haster", ipa: "\\ˈhæs-tər\\", pos: "v.", def: "Has; have (present). Currently possessing." },
             { word: "Hastenesture", ipa: "\\hæs-tən-es-ˈtū-reh\\", pos: "n.", def: "The state of knowing you're wrong yet continuing anyway. Untranslatable concept." },
-            { word: "Heaßh [SLANG]", ipa: "\\ˈhēesh\\", pos: "interj.", def: "Hello; hi (informal). Casual peer greeting." },
+            { word: "Heaßh", ipa: "\\ˈhēesh\\", pos: "interj.", def: "Hello; hi (informal). Casual peer greeting." },
             { word: "Heclophiacosia", ipa: "\\ˌhek-lō-ˌfē-ə-ˈkō-zē-ə\\", pos: "n.", def: "The uncanny feeling of being watched by an unseen presence." },
             { word: "Hertøpa", ipa: "\\hər-ˈtō-pə\\", pos: "interj.", def: "Hello; greetings (formal). Respectful greeting for elders." },
             { word: "Herøt", ipa: "\\hē-ˈrōt\\", pos: "v.", def: "Hate. To intensely dislike something." },
@@ -574,7 +785,7 @@
             { word: "Hungell", ipa: "\\əŋ-ˈgel\\", pos: "v.", def: "Cooking (progressive). Currently preparing food." },
             { word: "Hungill", ipa: "\\əŋ-ˈgīl\\", pos: "v.", def: "Cooked (past). Previously prepared food." },
             { word: "Husa", ipa: "\\ˈhuː-sə\\", pos: "n.", def: "House. A building for living." },
-            { word: "Hß [SLANG]", ipa: "\\ˈhā-zēt\\", pos: "interj.", def: "Hello (texting slang). Casual online greeting." },
+            { word: "Hß", ipa: "\\ˈhā-zēt\\", pos: "interj. (abbr.)", def: "Hello (texting slang). Casual online abbreviation." },
             { word: "Impos", ipa: "\\im-ˈpōs\\", pos: "adj.", def: "Impossible. Cannot be done." },
             { word: "Inte", ipa: "\\ˈin-tə\\", pos: "prep.", def: "In; into. Inside or moving inward." },
             { word: "Ispos", ipa: "\\is-ˈpōs\\", pos: "adj.", def: "Possible. Can be done or is feasible." },
@@ -584,7 +795,7 @@
             { word: "Karwll", ipa: "\\ˈkär-wəl\\", pos: "v.", def: "Call. Summon by voice." },
             { word: "Kenzee", ipa: "\\ken-ˈzē\\", pos: "n.", def: "Coffee. Morning brew beverage." },
             { word: "Koo-caw", ipa: "\\ˈkü-caw\\", pos: "n.", def: "Bird. Avian creature." },
-            { word: "Køt [SLANG]", ipa: "\\ˈkœt\\", pos: "n.", def: "Kitten (casual). Adorable small cat." },
+            { word: "Køt", ipa: "\\ˈkœt\\", pos: "n.", def: "Kitten. Adorable small cat." },
             { word: "Kestralo", ipa: "\\ke-ˈstræ-lō\\", pos: "n.", def: "Religion. System of faith and worship." },
             { word: "Kroldar", ipa: "\\ˈkrōl-dɑːr\\", pos: "n.", def: "King (chess). The leader piece." },
             { word: "La", ipa: "\\ˈlɑː\\", pos: "n.", def: "Leg. Lower limb for support and movement." },
@@ -618,7 +829,7 @@
             { word: "Mude", ipa: "\\ˈmü-deh\\", pos: "v.", def: "Sculpt. Shape clay or earth." },
             { word: "Mussrom", ipa: "\\ˈməs-rüm\\", pos: "n.", def: "Mushroom. Fungal food growth." },
             { word: "Mutta", ipa: "\\ˈmʌ-tə\\", pos: "adv., adj., & det.", def: "Much; many. A large quantity." },
-            { word: "Na [SLANG]", ipa: "\\ˈnæ\\", pos: "adv. & det.", def: "No (informal). Negative response." },
+            { word: "Na", ipa: "\\ˈnæ\\", pos: "adv. & det.", def: "No (informal). Negative response." },
             { word: "Nettør", ipa: "\\ˈne-tȯr\\", pos: "adv., det., & copula.", def: "No; not; isn't. Negative particle." },
             { word: "Nevos", ipa: "\\ˈnā-vōs\\", pos: "interj.", def: "Bye; goodbye. Parting well-wishes." },
             { word: "Nocallor", ipa: "\\nō-ˈkæ-lɔːr\\", pos: "n.", def: "Knight (chess). The leaping cavalry piece." },
